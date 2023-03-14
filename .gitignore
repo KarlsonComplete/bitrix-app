@@ -1,0 +1,10 @@
+/.idea
+###> symfony/framework-bundle ###
+php/bitrix-application/.env.local
+php/bitrix-application/.env.local.php
+php/bitrix-application/.env.*.local
+php/bitrix-application/config/secrets/prod/prod.decrypt.private.php
+php/bitrix-application/public/bundles/
+php/bitrix-application/var/
+php/bitrix-application/vendor/
+###< symfony/framework-bundle ###
