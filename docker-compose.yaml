@@ -25,3 +25,38 @@ services:
       - '9000'
     volumes:
       - ./php/bitrix-application:/var/www/project
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_DB: "db"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "bitrix"
+    ports:
+      - "127.0.0.1:65342:5432"
+    expose:
+      - "3306"
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+  rabbitmq:
+    image: rabbitmq:3.11.10-management-alpine
+    hostname: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=rmuser
+      - RABBITMQ_DEFAULT_PASS=rmpassword
+    ports:
+      - "15672:15672"
+  pgbackups:
+    image: prodrigestivill/postgres-backup-local
+    restart: always
+    user: postgres:postgres
+    volumes:
+      - db-data:/var/lib/postgresql/pgbackups
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=bitrix
