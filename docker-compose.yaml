@@ -57,6 +57,9 @@ services:
     depends_on:
       - postgres
     environment:
-      - POSTGRES_DB=db
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=bitrix
+        - POSTGRES_DB=db
+        - POSTGRES_USER=user
+        - POSTGRES_PASSWORD=bitrix
+volumes:
+   db-data:
+
